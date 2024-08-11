@@ -1,0 +1,7 @@
+---
+- name: Test playbook
+  hosts: servers
+  become: yes
+  tasks:
+    - name: Echo message
+      command: echo "Hello from Ansible"
