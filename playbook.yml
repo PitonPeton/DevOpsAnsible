@@ -1,0 +1,38 @@
+---
+- name: Instalar paquetes
+  hosts: web
+  become: yes
+  tasks:  
+    - name: Instalar nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+- name: Crear usuario
+  hosts: app
+  become: yes  
+  tasks:  
+    - name: Crear un nuevo usuario
+      user:
+        name: Itla
+        state: present
+
+- name: Tareas de configuración
+  hosts: all
+  become: yes
+  tasks:
+    - name: Instalar cowsay
+      apt:
+        name: cowsay
+        state: present
+        update_cache: yes
+
+    - name: Crear directorio
+      file:
+        path: directorio_nuevo
+        state: directory
+        mode: '0755'
+
+    - name: Ejecutar un script
+      script: script.sh
